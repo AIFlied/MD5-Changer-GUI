@@ -21,7 +21,6 @@ def listdir(path, list_name):
 file_list=''
 dirname=''
 
-
 class Frame(wx.Frame):
     def __init__(self):
         wx.Frame.__init__(self, None, title='MD5CHANGER_GUI', size=(571, 301),name='frame',style=541072896)
@@ -30,50 +29,50 @@ class Frame(wx.Frame):
         self.mainwindow.SetOwnBackgroundColour((255, 255, 255, 255))
         self.Centre()
         self.btn_ok = wx.Button(self.mainwindow,size=(200, 60),pos=(70, 164),label='Start',name='button')
-        self.btn_ok.Bind(wx.EVT_BUTTON,self.btn_ok_按钮被单击)
+        self.btn_ok.Bind(wx.EVT_BUTTON,self.btn_ok_OnCLick)
         self.btn_exit = wx.Button(self.mainwindow,size=(200, 60),pos=(287, 164),label='Exit',name='button')
-        self.btn_exit.Bind(wx.EVT_BUTTON,self.btn_exit_按钮被单击)
+        self.btn_exit.Bind(wx.EVT_BUTTON,self.btn_exit_OnCLick)
         self.editbox1 = wx.TextCtrl(self.mainwindow,size=(251, 26),pos=(159, 98),value='',name='text',style=0)
         self.label1 = wx.StaticText(self.mainwindow,size=(118, 25),pos=(28, 99),label='File or Directory : ',name='staticText',style=2321)
-        label1_字体 = wx.Font(10,74,90,400,False,'Microsoft YaHei UI',-1)
-        self.label1.SetFont(label1_字体)
+        label1_Font = wx.Font(10,74,90,400,False,'Microsoft YaHei UI',-1)
+        self.label1.SetFont(label1_Font)
         self.btn_file = wx.Button(self.mainwindow,size=(96, 90),pos=(426, 35),label='File Browser',name='button')
-        btn_file_字体 = wx.Font(10,70,90,400,False,'Microsoft YaHei UI',-1)
-        self.btn_file.SetFont(btn_file_字体)
-        self.btn_file.Bind(wx.EVT_BUTTON,self.btn_file_按钮被单击)
+        btn_file_Font = wx.Font(10,70,90,400,False,'Microsoft YaHei UI',-1)
+        self.btn_file.SetFont(btn_file_Font)
+        self.btn_file.Bind(wx.EVT_BUTTON,self.btn_file_OnCLick)
         self.combobox1 = wx.ComboBox(self.mainwindow,value='Only Selected Files',pos=(159, 37),name='comboBox',choices=['Only Selected Files', 'All Files Under the Directory'],style=16)
         self.combobox1.SetSize((250, 27))
-        combobox1_字体 = wx.Font(10,74,90,400,False,'Microsoft YaHei UI',-1)
-        self.combobox1.Bind(wx.EVT_COMBOBOX,self.combobox1_选中列表项)
-        self.combobox1.SetFont(combobox1_字体)
+        combobox1_Font = wx.Font(10,74,90,400,False,'Microsoft YaHei UI',-1)
+        self.combobox1.Bind(wx.EVT_COMBOBOX,self.combobox1_SeLIST)
+        self.combobox1.SetFont(combobox1_Font)
         self.label2 = wx.StaticText(self.mainwindow,size=(99, 24),pos=(27, 41),label='Execute Way :',name='staticText',style=2321)
-        label2_字体 = wx.Font(10,74,90,400,False,'Microsoft YaHei UI',-1)
-        self.label2.SetFont(label2_字体)
+        label2_Font = wx.Font(10,74,90,400,False,'Microsoft YaHei UI',-1)
+        self.label2.SetFont(label2_Font)
         self.label_cprt = wx.StaticText(self.mainwindow,size=(80, 24),pos=(474, 238),label='By.bGVveno=',name='staticText',style=2321)
         self.label_cprt.SetForegroundColour((255, 255, 255, 255))
 
-    def combobox1_选中列表项(self,event):
+    def combobox1_SeLIST(self,event):
         self.editbox1.SetValue('')
         
-    def btn_ok_按钮被单击(self,event):
+    def btn_ok_OnCLick(self,event):
         if self.combobox1.GetValue() == 'Only Selected Files':
             changemd5(file_list)
             toastone = wx.MessageDialog(self,message="Complete!!",caption="Message",style= wx.YES_DEFAULT | wx.ICON_QUESTION)
-            if toastone.ShowModal() == wx.ID_YES:  # 如果点击了提示框的确定按钮
-                toastone.Destroy()  # 则关闭提示框 
+            if toastone.ShowModal() == wx.ID_YES: 
+                toastone.Destroy() 
                       
         elif self.combobox1.GetValue() == 'All Files Under the Directory':
             changemd5(templist)
             toastone = wx.MessageDialog(self,message="Complete!!",caption="Message",style= wx.YES_DEFAULT | wx.ICON_QUESTION)
-            if toastone.ShowModal() == wx.ID_YES:  # 如果点击了提示框的确定按钮
-                toastone.Destroy()  # 则关闭提示框 
+            if toastone.ShowModal() == wx.ID_YES:  
+                toastone.Destroy()  
                    
 
-    def btn_exit_按钮被单击(self,event):
+    def btn_exit_OnCLick(self,event):
         self.Destroy()
         exit()
 
-    def btn_file_按钮被单击(self,event):       
+    def btn_file_OnCLick(self,event):       
         if self.combobox1.GetValue() == 'Only Selected Files':
             filedlg=wx.FileDialog(self, message="Select Files", defaultDir='', defaultFile='', wildcard='*.*', style=wx.FD_MULTIPLE)
             if filedlg.ShowModal() == wx.ID_OK:
@@ -92,7 +91,7 @@ class Frame(wx.Frame):
                 listdir(dirname,templist)
                 dirdlg.Destroy()
 
-    def btn_list_按钮被单击(self,event):
+    def btn_list_OnCLick(self,event):
         if self.combobox1.GetValue() == 'Only Selected Files':
             print(file_list)
             #self.Destroy()
