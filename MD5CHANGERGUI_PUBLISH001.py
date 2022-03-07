@@ -9,9 +9,8 @@ import random
 def changemd5(filelist):
     for ffile in filelist:
         with open(ffile,'a') as f:
-            if ffile != 'MD5CHANGERGUI.py':
-                for i in range(1,random.randint(2,5)):
-                    f.write(' ')
+            for i in range(1,random.randint(2,5)):
+                f.write(' ')
 
 def listdir(path, list_name):
     for file in os.listdir(path):  
